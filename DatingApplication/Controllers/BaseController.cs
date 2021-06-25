@@ -8,6 +8,8 @@ namespace DatingApplication.Controllers
 {
     public class BaseController : Controller
     {
+        //test
+
         protected DatingEntities db = null;
 
         public BaseController() //used just to provide db context to controllers easily
