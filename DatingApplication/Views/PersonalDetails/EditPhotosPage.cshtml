@@ -1,0 +1,145 @@
+﻿@model List<DatingApplication.Models.ImagesViewModel>
+@using DatingApplication.Helpers
+<!-- This view is used both during registration for the initial image uploads and from inside the application for editing -->
+@{
+    if (ViewBag.Action != null)
+    {
+        //choose layout based on the where we are
+        if (ViewBag.Action == "create")
+        {
+            Layout = null;
+        }
+        else
+        {
+            Layout = "~/Views/Shared/_Layout.cshtml";
+        }
+    }
+}
+
+@if (ViewBag.Action == "create") //if we are on registation then we have no layout so we need to import all the following
+{
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MyDatingApp - Προσωπικά Στοιχεία</title>
+
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/Style.css") />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src=@Url.Content("~/Scripts/Script.js")></script>
+
+    </head>
+}
+
+
+@{ var i = 0; }
+<div class="container" style="margin-top:5%">
+    @{ string text = ViewBag.action == "create" ? "...και μερικές φωτογραφίες σου..." : ""; }
+    <h5 style="text-align:center;">@text</h5>
+    <div>
+        @while (i < 6) //total of 6 images
+        {
+            string path = i < Model.Count() ? Model[i].Path : "no-image.png";
+            string imageClass = i < Model.Count ? "" : "default-image";
+            if (i == 0)
+            {
+                @:<div class="row justify-content-center">
+                }
+
+                if (i % 3 == 0 && i != 0) //every 3 images, make new row
+                {
+                @:</div><div class='row justify-content-center'>
+                }
+                <div class="card">
+
+                    <img class="card-img-top @imageClass" src=@Url.Content("~/Content/Images/UserImages/"+path) alt="Card image cap">
+                    <div class="card-footer ">
+                        @if (i < Model.Count()) //if image exists, show it
+                        {
+                            if (CommonHelpers.GetUserProfileImage() != Model[i].Path.Split('/')[1])
+                            {
+                                <i class="fas fa-user-plus profile-user-image-btn" onclick="selectImageAsProfile(@Model[i].Id);" title="Επιλογή σαν φωτογραφία προφίλ"></i>
+                                <i class="fas fa-trash delete-user-image" onclick="deleteImage(@Model[i].Id)" title="Διαγραφή"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-user-check profile-user-image-btn" title="Φωτογραφία προφίλ"></i>
+                            }
+                        }
+                        else //else show default
+                        {
+                            <i class="fas fa-plus delete-user-image" onclick="showUploadModal();" title="Προσθήκη φωτογραφίας"></i>
+                        }
+                    </div>
+                </div>
+                if (i == 5)
+                {
+                @:</div>
+                if (ViewBag.Action == "create") //if on registration, show button to allow user to continue only after uploading alteast 1 image
+                {
+                    if (Model.Count() > 0)
+                    {
+                        <div class="row justify-content-center"><a class="btn btn-primary btn-purple" style="width:auto !important" href="~/Preferences">Συνέχεια</a></div>
+                    }
+                }
+            }
+
+            i++;
+        }
+
+    </div>
+
+</div>
+@if (ViewBag.Error != null || ViewBag.Success != null)
+{
+    string messageText = "";
+    string messageClass = "";
+    if (ViewBag.Error != null)
+    {
+        messageText = ViewBag.Error;
+        messageClass = "danger";
+    }
+
+    if (ViewBag.Success != null)
+    {
+        messageText = ViewBag.Success;
+        messageClass = "success";
+    }
+
+    <div class="alert alert-position alert-@messageClass" role="alert">
+        @messageText
+    </div>
+}
+
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content modal-settings ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Ανέβασμα φωτογραφίας</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" style="color:white;">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("UploadImages", "PersonalDetails", FormMethod.Post, new { @id = "personal-details-form", @enctype = "multipart/form-data" }))
+                {
+                    <div class="form-group form-item-column">
+                        <input class="form-control-file" id="ImagePath" type="hidden" name="reloadAction" value=@ViewContext.RouteData.Values["action"].ToString() />
+                        <input class="form-control-file" id="ImagePath" type="file" name="file" accept="image/png, image/jpeg" />
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-purple" style="width:30%;float:right;">Αποθήκευση</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

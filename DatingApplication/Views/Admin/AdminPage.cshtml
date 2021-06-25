@@ -1,0 +1,60 @@
+﻿@model DatingApplication.Models.AdminStatsViewModel
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+@{ var counter = 1;}
+<div class="container" style="width:70%;margin-top:10%">
+
+
+    <div class="row">
+        <div class="stats-subcontainer">
+            <h6 style="padding-bottom:15px;text-align:center">Κατηγορίες χρηστών</h6>
+            <div class="stacked-profile-items"><i class="fas fa-star" style="font-size:25px"></i></div><div class="stacked-profile-items" style="text-align:end"><i class="fas fa-user" style="font-size:25px;padding-right:0px"></i></div>
+            <div style="width:100%">
+                <div title="@Model.PremiumUsersPerc% Premium χρήστες" style="width:@Model.PremiumUsersPerc%;" class="left-part-of-stat-bar"></div>
+                <div title="@Model.SimpleUsersPerc% Απλοί χρήστες" style="width:@Model.SimpleUsersPerc%;" class="right-part-of-stat-bar"></div>
+            </div>
+            <p style="text-align:center">Νέες εγγραφές τις τελευταίες 7 μέρες</p><div class="stat-value-container"><i class="fas fa-user-plus"></i>@Model.NoOfNewUsers</div>
+        </div>
+
+        <div class="stats-subcontainer">
+            <div style="width:100%">
+                <h6 style="padding-bottom:15px;text-align:center">Δημογραφικά στοιχεία</h6>
+                <div class="stacked-profile-items"><i class="fas fa-mars" style="font-size:25px"></i></div><div class="stacked-profile-items" style="text-align:end"><i class="fas fa-venus" style="font-size:25px;padding-right:0px"></i></div>
+                <div title="@Model.MenPerc% Άνδρες χρήστες" style="width:@Model.MenPerc%;" class="left-part-of-stat-bar"></div>
+                <div title="@Model.WomenPerc% Γυναίκες χρήστες" style="width:@Model.WomenPerc%;" class="right-part-of-stat-bar"></div>
+            </div>
+            <p style="text-align:center">Μέσος όρος ηλικίας χρηστών</p><div class="stat-value-container"><i class="fas fa-calendar-alt"></i>@Model.AverageAge</div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="stats-subcontainer">
+            <h6 style="text-align:center;padding-bottom:15px;">Δημοφιλή ενδιαφέροντα</h6>
+            <div class="stacked-profile-items">
+                <ul>
+                    @{ var listItems = Model.PopularHobbies.Count() >= 5 ? 5 : Model.PopularHobbies.Count(); }
+                    @for(var i=0;i< listItems; i++)
+                    {
+                        <div>@counter. @Model.PopularHobbies[i]</div>
+                        counter++;
+                    }
+                </ul>
+            </div>
+            <div class="stacked-profile-items">
+                <ul>
+                    @for (var i = 5; i < Model.PopularHobbies.Count(); i++)
+                    {
+                        <div>@counter. @Model.PopularHobbies[i]</div>
+                        counter++;
+                    }
+                </ul>
+            </div>
+            
+        </div>
+
+        <div class="stats-subcontainer" style="text-align:center">
+            <h6 style="padding-bottom:15px;">Κινητικότητα χρηστών</h6>
+            Συνολικές επισκέψεις τις τελευταίες 7 μέρες<div class="stat-value-container"><i class="fas fa-eye"></i>@Model.VisitsLastWeek</div>
+            Συνολικές βαθμολογήσεις τις τελευταίες 7 μέρες<div class="stat-value-container"><i class="fas fa-heart"></i>@Model.RatingsLastWeek</div>
+        </div>
+    </div>
+</div>

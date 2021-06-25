@@ -1,0 +1,652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DatingModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="eye_colors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="genders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hair_colors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hobbies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payment_methods">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="active" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="payment_method" Type="int" Nullable="false" />
+          <Property Name="means_of_payment_id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="payment_date" Type="date" Nullable="false" />
+          <Property Name="amount" Type="decimal" Precision="3" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="profile_visits">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_visiting" Type="int" Nullable="false" />
+          <Property Name="user_visited" Type="int" Nullable="false" />
+          <Property Name="visit_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ratings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_rating" Type="int" Nullable="false" />
+          <Property Name="user_rated" Type="int" Nullable="false" />
+          <Property Name="rating" Type="int" Nullable="false" />
+          <Property Name="rating_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_details">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="gender" Type="int" Nullable="false" />
+          <Property Name="age" Type="int" Nullable="false" />
+          <Property Name="height" Type="int" Nullable="false" />
+          <Property Name="weight" Type="int" Nullable="false" />
+          <Property Name="self_description" Type="text" Nullable="false" />
+          <Property Name="eye_color" Type="int" Nullable="false" />
+          <Property Name="hair_color" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_hobbies">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="hobby_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="hobby_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_hobbies_preferences">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="hobby_id" />
+          </Key>
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="hobby_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_images">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="image_path" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="profile_image" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_preferences_age">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="age_from" Type="int" />
+          <Property Name="age_to" Type="int" />
+        </EntityType>
+        <EntityType Name="user_preferences_eye_color">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="eye_color" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_preferences_gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="gender" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_preferences_hair_color">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="hair_color" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_preferences_height">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="height_from" Type="int" />
+          <Property Name="height_to" Type="int" />
+        </EntityType>
+        <EntityType Name="user_preferences_hobbies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="hobby" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_preferences_weight">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_id" Type="int" Nullable="false" />
+          <Property Name="weight_from" Type="int" />
+          <Property Name="weight_to" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="category" Type="int" Nullable="false" />
+          <Property Name="register_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DatingModelStoreContainer">
+          <EntitySet Name="eye_colors" EntityType="Self.eye_colors" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="genders" EntityType="Self.genders" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="hair_colors" EntityType="Self.hair_colors" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="hobbies" EntityType="Self.hobbies" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="payment_methods" EntityType="Self.payment_methods" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="payments" EntityType="Self.payments" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="profile_visits" EntityType="Self.profile_visits" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="ratings" EntityType="Self.ratings" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_categories" EntityType="Self.user_categories" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_details" EntityType="Self.user_details" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_hobbies" EntityType="Self.user_hobbies" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_hobbies_preferences" EntityType="Self.user_hobbies_preferences" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_images" EntityType="Self.user_images" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_preferences_age" EntityType="Self.user_preferences_age" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_preferences_eye_color" EntityType="Self.user_preferences_eye_color" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_preferences_gender" EntityType="Self.user_preferences_gender" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_preferences_hair_color" EntityType="Self.user_preferences_hair_color" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_preferences_height" EntityType="Self.user_preferences_height" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_preferences_hobbies" EntityType="Self.user_preferences_hobbies" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="user_preferences_weight" EntityType="Self.user_preferences_weight" Schema="dating" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dating" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="eye_colors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="genders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hair_colors">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="hobbies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payment_methods">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="active" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="payments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="payment_method" Type="Int32" Nullable="false" />
+          <Property Name="means_of_payment_id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="payment_date" Type="DateTime" Nullable="false" />
+          <Property Name="amount" Type="Decimal" Nullable="false" />
+        </EntityType>
+        <EntityType Name="profile_visits">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_visiting" Type="Int32" Nullable="false" />
+          <Property Name="user_visited" Type="Int32" Nullable="false" />
+          <Property Name="visit_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_categories">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_details">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="gender" Type="Int32" Nullable="false" />
+          <Property Name="age" Type="Int32" Nullable="false" />
+          <Property Name="height" Type="Int32" Nullable="false" />
+          <Property Name="weight" Type="Int32" Nullable="false" />
+          <Property Name="self_description" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="eye_color" Type="Int32" Nullable="false" />
+          <Property Name="hair_color" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_hobbies">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="hobby_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="hobby_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_hobbies_preferences">
+          <Key>
+            <PropertyRef Name="user_id" />
+            <PropertyRef Name="hobby_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="hobby_id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_images">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="image_path" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profile_image" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_preferences_age">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="age_from" Type="Int32" />
+          <Property Name="age_to" Type="Int32" />
+        </EntityType>
+        <EntityType Name="user_preferences_eye_color">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="eye_color" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_preferences_gender">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="gender" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_preferences_hair_color">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="hair_color" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_preferences_height">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="height_from" Type="Int32" />
+          <Property Name="height_to" Type="Int32" />
+        </EntityType>
+        <EntityType Name="user_preferences_hobbies">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="hobby" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user_preferences_weight">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_id" Type="Int32" Nullable="false" />
+          <Property Name="weight_from" Type="Int32" />
+          <Property Name="weight_to" Type="Int32" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="category" Type="Int32" Nullable="false" />
+          <Property Name="register_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="DatingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="eye_colors" EntityType="Self.eye_colors" />
+          <EntitySet Name="genders" EntityType="Self.genders" />
+          <EntitySet Name="hair_colors" EntityType="Self.hair_colors" />
+          <EntitySet Name="hobbies" EntityType="Self.hobbies" />
+          <EntitySet Name="payment_methods" EntityType="Self.payment_methods" />
+          <EntitySet Name="payments" EntityType="Self.payments" />
+          <EntitySet Name="profile_visits" EntityType="Self.profile_visits" />
+          <EntitySet Name="user_categories" EntityType="Self.user_categories" />
+          <EntitySet Name="user_details" EntityType="Self.user_details" />
+          <EntitySet Name="user_hobbies" EntityType="Self.user_hobbies" />
+          <EntitySet Name="user_hobbies_preferences" EntityType="Self.user_hobbies_preferences" />
+          <EntitySet Name="user_images" EntityType="Self.user_images" />
+          <EntitySet Name="user_preferences_age" EntityType="Self.user_preferences_age" />
+          <EntitySet Name="user_preferences_eye_color" EntityType="Self.user_preferences_eye_color" />
+          <EntitySet Name="user_preferences_gender" EntityType="Self.user_preferences_gender" />
+          <EntitySet Name="user_preferences_hair_color" EntityType="Self.user_preferences_hair_color" />
+          <EntitySet Name="user_preferences_height" EntityType="Self.user_preferences_height" />
+          <EntitySet Name="user_preferences_hobbies" EntityType="Self.user_preferences_hobbies" />
+          <EntitySet Name="user_preferences_weight" EntityType="Self.user_preferences_weight" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="ratings" EntityType="DatingModel.ratings" />
+        </EntityContainer>
+        <EntityType Name="ratings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_rating" Type="Int32" Nullable="false" />
+          <Property Name="user_rated" Type="Int32" Nullable="false" />
+          <Property Name="rating" Type="Int32" Nullable="false" />
+          <Property Name="rating_date" Type="DateTime" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatingModelStoreContainer" CdmEntityContainer="DatingEntities">
+          <EntitySetMapping Name="eye_colors">
+            <EntityTypeMapping TypeName="DatingModel.eye_colors">
+              <MappingFragment StoreEntitySet="eye_colors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="genders">
+            <EntityTypeMapping TypeName="DatingModel.genders">
+              <MappingFragment StoreEntitySet="genders">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hair_colors">
+            <EntityTypeMapping TypeName="DatingModel.hair_colors">
+              <MappingFragment StoreEntitySet="hair_colors">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="hobbies">
+            <EntityTypeMapping TypeName="DatingModel.hobbies">
+              <MappingFragment StoreEntitySet="hobbies">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payment_methods">
+            <EntityTypeMapping TypeName="DatingModel.payment_methods">
+              <MappingFragment StoreEntitySet="payment_methods">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="active" ColumnName="active" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="payments">
+            <EntityTypeMapping TypeName="DatingModel.payments">
+              <MappingFragment StoreEntitySet="payments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="payment_method" ColumnName="payment_method" />
+                <ScalarProperty Name="means_of_payment_id" ColumnName="means_of_payment_id" />
+                <ScalarProperty Name="payment_date" ColumnName="payment_date" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="profile_visits">
+            <EntityTypeMapping TypeName="DatingModel.profile_visits">
+              <MappingFragment StoreEntitySet="profile_visits">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_visiting" ColumnName="user_visiting" />
+                <ScalarProperty Name="user_visited" ColumnName="user_visited" />
+                <ScalarProperty Name="visit_date" ColumnName="visit_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_categories">
+            <EntityTypeMapping TypeName="DatingModel.user_categories">
+              <MappingFragment StoreEntitySet="user_categories">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_details">
+            <EntityTypeMapping TypeName="DatingModel.user_details">
+              <MappingFragment StoreEntitySet="user_details">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="self_description" ColumnName="self_description" />
+                <ScalarProperty Name="eye_color" ColumnName="eye_color" />
+                <ScalarProperty Name="hair_color" ColumnName="hair_color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_hobbies">
+            <EntityTypeMapping TypeName="DatingModel.user_hobbies">
+              <MappingFragment StoreEntitySet="user_hobbies">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="hobby_id" ColumnName="hobby_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_hobbies_preferences">
+            <EntityTypeMapping TypeName="DatingModel.user_hobbies_preferences">
+              <MappingFragment StoreEntitySet="user_hobbies_preferences">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="hobby_id" ColumnName="hobby_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_images">
+            <EntityTypeMapping TypeName="DatingModel.user_images">
+              <MappingFragment StoreEntitySet="user_images">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="image_path" ColumnName="image_path" />
+                <ScalarProperty Name="profile_image" ColumnName="profile_image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_preferences_age">
+            <EntityTypeMapping TypeName="DatingModel.user_preferences_age">
+              <MappingFragment StoreEntitySet="user_preferences_age">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="age_from" ColumnName="age_from" />
+                <ScalarProperty Name="age_to" ColumnName="age_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_preferences_eye_color">
+            <EntityTypeMapping TypeName="DatingModel.user_preferences_eye_color">
+              <MappingFragment StoreEntitySet="user_preferences_eye_color">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="eye_color" ColumnName="eye_color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_preferences_gender">
+            <EntityTypeMapping TypeName="DatingModel.user_preferences_gender">
+              <MappingFragment StoreEntitySet="user_preferences_gender">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="gender" ColumnName="gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_preferences_hair_color">
+            <EntityTypeMapping TypeName="DatingModel.user_preferences_hair_color">
+              <MappingFragment StoreEntitySet="user_preferences_hair_color">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="hair_color" ColumnName="hair_color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_preferences_height">
+            <EntityTypeMapping TypeName="DatingModel.user_preferences_height">
+              <MappingFragment StoreEntitySet="user_preferences_height">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="height_from" ColumnName="height_from" />
+                <ScalarProperty Name="height_to" ColumnName="height_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_preferences_hobbies">
+            <EntityTypeMapping TypeName="DatingModel.user_preferences_hobbies">
+              <MappingFragment StoreEntitySet="user_preferences_hobbies">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="hobby" ColumnName="hobby" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="user_preferences_weight">
+            <EntityTypeMapping TypeName="DatingModel.user_preferences_weight">
+              <MappingFragment StoreEntitySet="user_preferences_weight">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="weight_from" ColumnName="weight_from" />
+                <ScalarProperty Name="weight_to" ColumnName="weight_to" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="DatingModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="register_date" ColumnName="register_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ratings">
+            <EntityTypeMapping TypeName="DatingModel.ratings">
+              <MappingFragment StoreEntitySet="ratings">
+                <ScalarProperty Name="rating_date" ColumnName="rating_date" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="user_rated" ColumnName="user_rated" />
+                <ScalarProperty Name="user_rating" ColumnName="user_rating" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

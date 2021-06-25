@@ -1,0 +1,14 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="container upgrade-container" style="text-align:center;height:45%;padding-top:25px;">
+    <div style="margin-bottom:20px;">
+        <i class="fas fa-check-circle" style="font-size:150px"></i>
+    </div>
+    <div>
+        <h4>Η συναλλαγή ολοκληρώθηκε με επιτυχία!</h4>
+        <h5>Μπορείς πλέον να απολάυσεις τα προνόμια του Premium. Το ταίρι σου σε περιμένει!</h5>
+        <br />
+        <p>Αριθμός συναλλαγής<br />@Guid.NewGuid()</p>
+        Η premium συνδρομή σου είναι ενεργή μέχρι @DateTime.Now.AddYears(1)
+    </div>
+</div>

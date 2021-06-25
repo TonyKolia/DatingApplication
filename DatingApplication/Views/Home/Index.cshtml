@@ -1,0 +1,73 @@
+﻿@using DatingApplication.Models;
+@model List<UserInfoViewModel>
+
+<!-- This view is used whenever we need to render other users for the logged in user using cards (home page, search results, all users, profile raters, profile visitors)-->
+
+@{ var i = 0; }
+<div>
+    @while (i < Model.Count())
+    {
+
+        if (i == 0)
+        {
+            @:<div class="row">
+            }
+            //every 4 cards, create a new row 
+            if (i % 4 == 0 && i != 0 && i != Model.Count())
+            {
+            @:</div><div class='row'>
+            }
+
+            var userCategory = DatingApplication.Helpers.CommonHelpers.GetLoggedUserInfo().Category;
+            var hoverClass = userCategory == 2 ? "hoverable-card" : "";
+
+            <div class="card @hoverClass">
+                <img class="card-img-top" src=@Url.Content("~/Content/Images/UserImages/"+Model[i].user_id+"/"+Model[i].ProfileImagePath) alt="Card image cap"> <!-- profile image-->
+                @if (userCategory == 2)
+                {<a class="btn btn-primary btn-purple details-btn" href="~/Profile/Index/@Model[i].user_id" title="Περισσότερα"><i class="fas fa-eye" style="padding-right:0px"></i></a>}
+                <div class="card-body" style="padding-left:10px;padding-right:10px;padding-top:15px;padding-bottom:5px">
+                    <div style="width:50%;float:left;">
+                        <h5>@Model[i].name, @Model[i].age</h5>
+                    </div>
+
+
+                </div>
+            </div>
+
+            if (i == Model.Count())
+            {
+            @:</div>
+        }
+
+        i++;
+    }
+    @if (Model.Count() == 0)
+    {
+        <div class="no-items"><h5>Δεν βρέθηκαν χρήστες</h5></div>
+    }
+</div>
+@if (ViewBag.Error != null || ViewBag.Success != null)
+{
+    string messageText = "";
+    string messageClass = "";
+    if (ViewBag.Error != null)
+    {
+        messageText = ViewBag.Error;
+        messageClass = "danger";
+    }
+
+    if (ViewBag.Success != null)
+    {
+        messageText = ViewBag.Success;
+        messageClass = "success";
+    }
+
+    <div class="alert alert-position alert-@messageClass" role="alert">
+        @messageText
+    </div>
+}
+
+
+
+
+

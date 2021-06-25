@@ -1,0 +1,43 @@
+﻿@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+
+
+    <div class="container upgrade-container" style="height:32%;width:50%">
+        <h5 class="login-label">Κατέβασμα εφαρμογής για κινητό</h5>
+        <p style="text-align:center">
+            Είσαι Premium μέλος κι αυτό σημαίνει πρόνομια!<br /><br />
+            Με την εφαρμογή της New Beginings για κινητό μπορείς να μπείς στον κόσμο του mobile dating.<br /><br />
+            Κατέβασε την τώρα και βρες το ταίρι σου όπου κι αν βρίσκεσαι.<br /><br />
+        </p>
+
+        @using (Html.BeginForm("DownloadApp", "Download", FormMethod.Post, new { @id = "download-form" }))
+        {
+            <div class="form-group">
+                <button type="submit" style="width:30%;margin-left:35%" class="btn btn-primary btn-purple form-control" id="downloadBtn" onclick="refreshBtn();">Λήψη</button>
+            </div>
+        }
+
+
+
+        @if (ViewBag.Error != null || ViewBag.Success != null)
+        {
+            string messageText = "";
+            string messageClass = "";
+            if (ViewBag.Error != null)
+            {
+                messageText = ViewBag.Error;
+                messageClass = "danger";
+            }
+
+            if (ViewBag.Success != null)
+            {
+                messageText = ViewBag.Success;
+                messageClass = "success";
+            }
+
+            <div class="alert alert-position alert-@messageClass" role="alert">
+                @messageText
+            </div>
+        }
+
+        </div>

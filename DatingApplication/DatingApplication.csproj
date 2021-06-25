@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BBFA72DB-3BF5-4DC7-9D42-D06689B0AB9C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DatingApplication</RootNamespace>
+    <AssemblyName>DatingApplication</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44342</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.10\Assemblies\v4.5\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.10.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.9.10\Assemblies\v4.5\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\DownloadController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogoutController.cs" />
+    <Compile Include="Controllers\PersonalDetailsController.cs" />
+    <Compile Include="Controllers\PreferencesController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\RatingController.cs" />
+    <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="Controllers\UpgradeController.cs" />
+    <Compile Include="DatingModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatingModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatingModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DatingModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DatingModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="eye_colors.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="genders.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="hair_colors.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AdminHelper.cs" />
+    <Compile Include="Helpers\CommonHelpers.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\HomeHelper.cs" />
+    <Compile Include="Helpers\LoginHelper.cs" />
+    <Compile Include="Helpers\OperationResult.cs" />
+    <Compile Include="Helpers\PasswordHelper.cs" />
+    <Compile Include="Helpers\PersonalDetailsHelper.cs" />
+    <Compile Include="Helpers\PreferencesHelper.cs" />
+    <Compile Include="Helpers\ProfileHelper.cs" />
+    <Compile Include="Helpers\RatingHelper.cs" />
+    <Compile Include="Helpers\RegisterHelper.cs" />
+    <Compile Include="Helpers\UpgradeHelper.cs" />
+    <Compile Include="hobbies.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AdminStatsViewModel.cs" />
+    <Compile Include="Models\BasicUserInfo.cs" />
+    <Compile Include="Models\ImagesViewModel.cs" />
+    <Compile Include="Models\PersonalDetailsViewModel.cs" />
+    <Compile Include="Models\PreferencesViewModel.cs" />
+    <Compile Include="Models\ProfileViewModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
+    <Compile Include="Models\UpgradeViewModel.cs" />
+    <Compile Include="Models\UserDisplayViewModel.cs" />
+    <Compile Include="Models\UserInfoViewModel.cs" />
+    <Compile Include="payments.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="payment_methods.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="profile_visits.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ratings.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="users.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_categories.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_details.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_hobbies.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_hobbies_preferences.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_images.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_preferences_age.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_preferences_eye_color.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_preferences_gender.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_preferences_hair_color.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_preferences_height.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_preferences_hobbies.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user_preferences_weight.cs">
+      <DependentUpon>DatingModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\logo.svg" />
+    <Content Include="Content\Images\3.jpg" />
+    <Content Include="Content\Images\1.jpg" />
+    <Content Include="Content\Images\2.jpg" />
+    <Content Include="Content\Images\UserImages\10\62a4695c-31cc-44c4-aaeb-53954aa906dc.jpg" />
+    <Content Include="Content\Images\UserImages\10\eab7132d-bd69-4e2f-8c34-37ce426099e8.jpg" />
+    <Content Include="Content\Images\UserImages\11\627f2b5f-c585-4944-ac80-e8a99385075f.jpg" />
+    <Content Include="Content\Images\UserImages\11\7184b7bc-dac9-4dd6-8f3d-6287cc7f6110.jpg" />
+    <Content Include="Content\Images\UserImages\12\2e0dd546-d324-4f1d-951b-39986def7169.jpg" />
+    <Content Include="Content\Images\UserImages\12\7a8b3b39-e514-46aa-9f7f-2fe15584f217.jpg" />
+    <Content Include="Content\Images\UserImages\12\d91642f9-609f-4fd1-9977-48338c207b8f.jpg" />
+    <Content Include="Content\Images\UserImages\13\59b58ff8-3979-472d-b00b-d193e84b8efe.jpg" />
+    <Content Include="Content\Images\UserImages\13\f5f75d88-f1bc-4bc5-8a52-c94db107a170.jpg" />
+    <Content Include="Content\Images\UserImages\13\f665f795-86d4-42ab-9c4b-5cedad0db2d7.jpg" />
+    <Content Include="Content\Images\UserImages\14\bf13c9c2-5446-44f4-93e5-9f1eb2e44088.jpg" />
+    <Content Include="Content\Images\UserImages\14\faf7ce96-a3c6-487e-968a-7880778a3836.jpg" />
+    <Content Include="Content\Images\UserImages\15\0b36ff2f-a5d9-494c-bcb6-3b58b93e85bb.jpg" />
+    <Content Include="Content\Images\UserImages\15\e91544a9-e497-4707-a1f2-5370cdd25c7e.jpg" />
+    <Content Include="Content\Images\UserImages\16\02187f0e-6332-4859-91d8-60c9a828e51d.jpg" />
+    <Content Include="Content\Images\UserImages\16\632db239-a491-4ff2-ac3a-5c433de3bdb1.jpg" />
+    <Content Include="Content\Images\UserImages\17\d1a3a2c3-4836-4285-832e-db24101e52db.jpg" />
+    <Content Include="Content\Images\UserImages\17\d34b46e1-b948-499b-8100-24689b78327b.jpg" />
+    <Content Include="Content\Images\UserImages\18\a402ba4e-ad67-4068-bf2e-7d3393478fcc.jpg" />
+    <Content Include="Content\Images\UserImages\18\cb7d9eb3-f449-4c2e-9323-38e13554cdbd.jpg" />
+    <Content Include="Content\Images\UserImages\19\177af347-75fb-4b18-98c2-d5617e1d0559.jpg" />
+    <Content Include="Content\Images\UserImages\19\437f60e1-635b-4fa8-906d-d92ea0010850.jpg" />
+    <Content Include="Content\Images\UserImages\20\14347b6b-3fa2-4a76-94d9-1f5894f58eaf.jpg" />
+    <Content Include="Content\Images\UserImages\20\477c163b-e342-4ac0-b8ba-a7668aa34314.jpg" />
+    <Content Include="Content\Images\UserImages\21\4603f061-a683-4975-939f-0cfaa824f088.jpg" />
+    <Content Include="Content\Images\UserImages\21\6102fec1-4789-453c-88bc-b4721f12c45c.jpg" />
+    <Content Include="Content\Images\UserImages\21\ad31a296-fe17-44b8-b116-79e8197f8daa.jpg" />
+    <Content Include="Content\Images\UserImages\22\7d06f0aa-1de1-481e-b9a6-5069643858ab.jpg" />
+    <Content Include="Content\Images\UserImages\22\bcd4aaaf-3ba8-43eb-b7ac-03f282b0cb97.jpg" />
+    <Content Include="Content\Images\UserImages\23\bdbf6037-7ce1-4c41-b60f-7b5b5609c869.jpg" />
+    <Content Include="Content\Images\UserImages\24\d1cfdd42-7bdd-4551-b37e-7556f0baf614.jpg" />
+    <Content Include="Content\Images\UserImages\25\7d60047e-16e3-4342-9a33-ce49fc7088c1.jpg" />
+    <Content Include="Content\Images\UserImages\25\ace8b53d-e6dd-42ec-9b83-f7560616e4d6.jpg" />
+    <Content Include="Content\Images\UserImages\25\b67f4426-b0dd-4fdb-b48f-47777d3866c7.jpg" />
+    <Content Include="Content\Images\UserImages\26\f2ceb94c-d40d-42ad-826e-98d0019bd53e.jpg" />
+    <Content Include="Content\Images\UserImages\27\70e42b3a-bc4f-48db-a64d-92274cc4474d.jpg" />
+    <Content Include="Content\Images\UserImages\27\be577449-b63f-4849-9d33-c8fa0afbe987.jpg" />
+    <Content Include="Content\Images\UserImages\28\425783b9-0613-4f91-aa37-8a307caaf2b7.jpg" />
+    <Content Include="Content\Images\UserImages\28\aa0b7a9e-31b9-4a5c-9a8b-92a72313e91e.jpg" />
+    <Content Include="Content\Images\UserImages\29\755b08fa-047f-4c9d-8b9f-9755ad64b008.png" />
+    <Content Include="Content\Images\UserImages\9\ef3917c9-9ca1-403e-976c-e0a88e5154f2.jpg" />
+    <Content Include="Content\Images\UserImages\9\feb4df2a-2ecb-4e1e-a553-57d8b284dafe.jpg" />
+    <Content Include="Content\Images\UserImages\no-image.png" />
+    <Content Include="Content\Style.css" />
+    <Content Include="DatingModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatingModel.edmx</DependentUpon>
+      <LastGenOutput>DatingModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DatingModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DatingModel.edmx</DependentUpon>
+      <LastGenOutput>DatingModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <EntityDeploy Include="DatingModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DatingModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DatingModel.edmx.diagram">
+      <DependentUpon>DatingModel.edmx</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.4.1.js" />
+    <Content Include="Scripts\jquery-3.4.1.min.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.js" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Script.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Login\_LoginPagePartial.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Register\_RegisterPagePartial.cshtml" />
+    <Content Include="Views\PersonalDetails\PersonalDetailsPage.cshtml" />
+    <Content Include="Views\Profile\ProfilePage.cshtml" />
+    <Content Include="Views\PersonalDetails\UploadImagesPage.cshtml" />
+    <Content Include="Views\PersonalDetails\EditPhotosPage.cshtml" />
+    <Content Include="Views\Upgrade\UpgradePage.cshtml" />
+    <Content Include="Views\Preferences\PreferencesPage.cshtml" />
+    <Content Include="Views\Search\SearchCriteriaPage.cshtml" />
+    <Content Include="Views\Download\DownloadPage.cshtml" />
+    <Content Include="Views\Admin\AdminPage.cshtml" />
+    <Content Include="Views\Upgrade\SuccessfulUpgrade.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\Logout\" />
+    <Folder Include="Views\Rating\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>54121</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44342/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

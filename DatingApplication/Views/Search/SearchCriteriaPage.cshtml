@@ -1,0 +1,111 @@
+﻿@model DatingApplication.Models.PreferencesViewModel
+@using MvcCheckBoxList
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    <div class="container">
+        @using (Html.BeginForm("Index", "Search", FormMethod.Post, new { @id = "search-form" }))
+        {
+            var listInfo = new MvcCheckBoxList.Model.HtmlListInfo(MvcCheckBoxList.Model.HtmlTag.vertical_columns, columns: 6);
+            if (ViewBag.action == "create")
+            {<h5 style="text-align:center;">Μοιράσου τις προτιμήσεις σου μαζί μας!</h5>}
+            <div id="preferences-basic-info" class="form-group-settings">
+                <h5 class="login-label">Βασικά στοιχεία</h5>
+                <div class="form-group form-item-column">
+                    <div onclick="toggleHobbiesList('genders', 'genders-toggle', null);" class="hover-pointer">
+                        <i class="fas fa-transgender"></i>@Html.LabelFor(m => m.PostedPreferences.Genders, "Φύλο")<i style="padding-left:15px;" class="fas fa-angle-down" id="genders-toggle"></i>
+                    </div>
+                    <div id="genders" style="display:none" class="hobbies-hidden">
+                        @Html.CheckBoxListFor(m => m.PostedPreferences.Genders, m => m.Genders, x => x.id, x => x.description, m => m.SelectedGenders, MvcCheckBoxList.Model.Position.Vertical, x => new { @class = "multiselect-list-item" })
+                    </div>
+                </div>
+                <div class="form-group form-item-column">
+                    <div class="form-field-divided">
+                        <i class="fas fa-calendar-alt"></i>@Html.LabelFor(m => m.AgeFrom, "Ηλικία από")
+                        @Html.TextBoxFor(m => m.AgeFrom, new { @type = "number", @class = "form-control", @min = "18", @max = "99", @maxlength = "2", @required = "true" })
+                    </div>
+                    <div class="form-field-divided">
+                        <i class="fas fa-calendar-alt"></i>@Html.LabelFor(m => m.AgeTo, "Ηλικία εώς")
+                        @Html.TextBoxFor(m => m.AgeTo, new { @type = "number", @class = "form-control", @min = "18", @max = "99", @maxlength = "2", @required = "true" })
+                    </div>
+                </div>
+            </div>
+
+            <div id="preferences-appearance-info" class="form-group-settings">
+                <h5 class="login-label">Στοιχεία εμφάνισης</h5>
+                <div class="form-group form-item-column">
+                    <div class="form-field-divided">
+                        <i class="fas fa-ruler-vertical"></i>@Html.LabelFor(m => m.HeightFrom, "Ύψος από (cm)")
+                        @Html.TextBoxFor(m => m.HeightFrom, new { @type = "number", @class = "form-control", @min = "100", @max = "230", @maxlength = "3", @required = "true" })
+                    </div>
+                    <div class="form-field-divided">
+                        <i class="fas fa-ruler-vertical"></i>@Html.LabelFor(m => m.HeightTo, "Ύψος εώς (cm)")
+                        @Html.TextBoxFor(m => m.HeightTo, new { @type = "number", @class = "form-control", @min = "100", @max = "230", @maxlength = "3", @required = "true" })
+                    </div>
+                </div>
+                <div class="form-group form-item-column">
+                    <div class="form-field-divided">
+                        <div><i class="fas fa-weight"></i>@Html.LabelFor(m => m.WeightFrom, "Βάρος από (kg)")</div>
+                        @Html.TextBoxFor(m => m.WeightFrom, new { @type = "number", @class = "form-control", @min = "30", @max = "500", @maxlength = "3", @required = "true" })
+                    </div>
+                    <div class="form-field-divided">
+                        <div><i class="fas fa-weight"></i>@Html.LabelFor(m => m.WeightTo, "Βάρος εώς (kg)")</div>
+                        @Html.TextBoxFor(m => m.WeightTo, new { @type = "number", @class = "form-control", @min = "30", @max = "500", @maxlength = "3", @required = "true" })
+                    </div>
+                </div>
+                <div class="form-group form-item-column">
+                    <div onclick="toggleHobbiesList('eye-colors', 'eye-colors-toggle', 'preferences-appearance-info');" class="hover-pointer"><i class="fas fa-eye"></i>@Html.LabelFor(m => m.PostedPreferences.EyeColors, "Χρώμα ματιών")<i style="padding-left:15px;" class="fas fa-angle-down" id="eye-colors-toggle"></i></div>
+                    <div id="eye-colors" style="display:none" class="hobbies-hidden">
+                        @Html.CheckBoxListFor(m => m.PostedPreferences.EyeColors, m => m.EyeColors, x => x.id, x => x.description, m => m.SelectedEyeColors, MvcCheckBoxList.Model.Position.Vertical, x => new { @class = "multiselect-list-item" })
+                    </div>
+                </div>
+                <div class="form-group form-item-column">
+                    <div onclick="toggleHobbiesList('hair-colors', 'hair-colors-toggle', 'preferences-appearance-info');" class="hover-pointer"><i class="fas fa-palette"></i>@Html.LabelFor(m => m.PostedPreferences.HairColors, "Χρώμα μαλλιών")<i style="padding-left:15px;" class="fas fa-angle-down" id="hair-colors-toggle"></i></div>
+                    <div id="hair-colors" style="display:none" class="hobbies-hidden">
+                        @Html.CheckBoxListFor(m => m.PostedPreferences.HairColors, m => m.HairColors, x => x.id, x => x.description, m => m.SelectedHairColors, MvcCheckBoxList.Model.Position.Vertical, x => new { @class = "multiselect-list-item" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="preferences-personal-info" class="form-group-settings">
+                <h5 class="login-label">Προσωπικά στοιχεία</h5>
+                <div class="form-group form-item-column">
+                    <div onclick="toggleHobbiesList('hobbies', 'hobbies-toggle', 'preferences-personal-info');" class="hover-pointer"><i class="fas fa-running"></i>@Html.LabelFor(m => m.PostedPreferences.HobbyIds, "Ενδιαφέροντα", new { @id = "hobbies-label" })<i style="padding-left:15px;" class="fas fa-angle-down" id="hobbies-toggle"></i></div>
+                    <div id="hobbies" style="display:none" class="hobbies-hidden">
+                        @Html.CheckBoxListFor(m => m.PostedPreferences.HobbyIds, m => m.Hobbies, x => x.id, x => x.description, m => m.SelectedHobbies, listInfo, x => new { @class = "multiselect-list-item" })
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-purple" style="width:30%;float:right;">Αναζήτηση</button>
+            </div>
+        }
+
+    </div>
+    @if (ViewBag.Error != null || ViewBag.Success != null)
+    {
+        string messageText = "";
+        string messageClass = "";
+        if (ViewBag.Error != null)
+        {
+            messageText = ViewBag.Error;
+            messageClass = "danger";
+        }
+
+        if (ViewBag.Success != null)
+        {
+            messageText = ViewBag.Success;
+            messageClass = "success";
+        }
+
+        <div class="alert alert-position alert-@messageClass" role="alert">
+            @messageText
+        </div>
+    }
+

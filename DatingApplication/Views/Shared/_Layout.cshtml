@@ -1,0 +1,150 @@
+﻿@using DatingApplication.Helpers
+@{  
+    var user = CommonHelpers.GetLoggedUserInfo();
+    var controller = @ViewContext.RouteData.Values["controller"].ToString();
+    var action = @ViewContext.RouteData.Values["action"].ToString();
+    string homeClass = "";
+    string profileClass = "";
+    string personalDetailsClass = "";
+    string photosClass = "";
+    string upgradeClass = "";
+    string visitorsClass = "";
+    string ratersClass = "";
+    string preferencesClass = "";
+    string allUsersClass = "";
+    string searchClass = "";
+    string downloadClass = "";
+
+    //the below huge if used to mark the selected section on the tree based on the controller - action we came from
+    //couldnt find a more elegant approach unfortunately
+
+    if (controller == "Home")
+        if (action == "Index")
+            homeClass = "tree-selected-item";
+        else if (action == "ProfileVisitors")
+            visitorsClass = "eye-selected";
+        else if (action == "ProfileRaters")
+            ratersClass = "eye-selected";
+        else if (action == "AllUsers")
+            allUsersClass = "tree-selected-item";
+        else if (action == "SearchResults")
+            searchClass = "tree-selected-item";
+    if(controller == "Admin")
+        homeClass = "tree-selected-item";
+    if (controller == "Search")
+        searchClass = "tree-selected-item";
+    if(controller == "Download")
+        downloadClass = "tree-selected-item";
+    if (controller == "Profile")
+        profileClass = "tree-selected-item";
+    if (controller == "Upgrade")
+        upgradeClass = "tree-selected-item";
+    if(controller == "Preferences")
+        preferencesClass = "tree-selected-item";
+    if (controller == "PersonalDetails")
+        if(action =="Edit")
+            personalDetailsClass = "tree-selected-item";
+        else if(action == "EditPhotos")
+            photosClass = "tree-selected-item";
+
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href=@Url.Content("~/Content/Style.css") />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src=@Url.Content("~/Scripts/Script.js")></script>
+</head>
+<body>
+    <div class="container home-container">
+        <div class="row" style="height:98%">
+            <!-- the tree menu on the left side of the screen -->
+            <div class="tree">
+                <div>
+                    @*<div>
+                        <img width="50" height="50" src="~/Content/Images/logo.svg" />
+                    </div>*@
+                    <div style="font-family: 'Dancing Script', cursive;text-align:center;font-size:30px;">
+                        @{ var color = user.Category == 2 ? "var(--main-color)" : "white"; } 
+                        <span style="font-size:60px;color:@color">N</span><span style="color:@color">ew Beginnings</span>
+                    </div>                    
+                </div>
+                @{ var imageUrl = user.Category == 3 ? Url.Content("~/Content/Images/UserImages/no-image.png") : Url.Content("~/Content/Images/UserImages/" + user.Id + "/" + CommonHelpers.GetUserProfileImage()); }
+                <div style="text-align:center;margin-top:5%">
+                    <img class="tree-img" src=@imageUrl /> <!-- Get profile image to show in tree -->
+                    <div style="text-align:center;margin-top:5%">
+                        @user.Name @user.Surname
+                    </div>
+                    <div style="margin-top:5%">
+                        <!-- Visitors and ratings indicators, interactive only for premium users -->
+                        @if (user.Category == 1)
+                        {
+                            <div class="form-item-column" title="Επισκέψεις τις τελευταίες 7 ημέρες">
+                                <i class="fas fa-eye"></i>@user.ProfileVisits
+                            </div>
+                            <div title="Μέσος όρος βαθμολογίας σου τις τελευταίες 7 ημέρες">
+                                <i class="fas fa-heart"></i>@RatingHelper.GetRatingAverage()
+                            </div>
+                        }
+                        else if (user.Category == 2)
+                        {
+                            <div class="form-item-column" title="Επισκέψεις τις τελευταίες 7 ημέρες, δες τους χρήστες!">
+                                <a href="~/Home/ProfileVisitors" id="eye"><i class="fas fa-eye @visitorsClass" id="eye-icon"></i>@user.ProfileVisits</a>
+                            </div>
+                            <div title="Μέσος όρος βαθμολογίας σου τις τελευταίες 7 ημέρες, δες τους χρήστες!">
+                                <a href="~/Home/ProfileRaters" id="eye"><i class="fas fa-heart @ratersClass"></i>@RatingHelper.GetRatingAverage()</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <!-- All the section choices of the tree. Different depending on the kind of user -->
+                <nav class="nav navbar-light">
+                    <div class=" flex-column" id="tree-navbar">
+                        @if (user.Category == 3)
+                        {
+                            <a href="/Admin" class="nav-link @homeClass" id="home"><i class="fas fa-home"></i>Αρχική</a>
+                        }
+                        @if (user.Category != 3)
+                        {
+                            <a href="/Home" class="nav-link @homeClass" id="home"><i class="fas fa-home"></i>Αρχική</a>
+                            <a href="/PersonalDetails/Edit" class="nav-link @personalDetailsClass"><i class="fas fa-user-cog"></i>Επεξεργασία στοιχείων</a>
+                            <a href="/PersonalDetails/EditPhotos" class="nav-link @photosClass"><i class="far fa-images"></i>Οι φωτογραφίες μου</a>
+                        }
+
+                        @if (user.Category == 1)
+                        {
+                            <a href="/Upgrade" class="nav-link @upgradeClass"><i class="fas fa-star"></i>Αναβάθμιση σε Premium</a>
+                        }
+                        else if (user.Category == 2)
+                        {
+                            <a href="/Preferences/Edit" class="nav-link @preferencesClass"><i class="fas fa-sliders-h"></i>Οι προτιμήσεις μου</a>
+                            <a href="~/Home/AllUsers" class="nav-link @allUsersClass"><i class="fas fa-users"></i>Όλοι οι χρήστες</a>
+                            <a href="~/Search" class="nav-link @searchClass"><i class="fas fa-search"></i>Αναζήτηση</a>
+                            <a href="~/Download" class="nav-link @downloadClass"><i class="fas fa-mobile-alt"></i>Εφαρμογή για κινητό</a>
+                        }
+                        <a href="/Logout" class="nav-link"><i class="fas fa-sign-out-alt"></i>Αποσύνδεση</a>
+                    </div>
+                </nav>
+            </div>
+            <!-- The right side of the screen where each section selected is rendered  -->
+            <div class="partial-container">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>

@@ -1,0 +1,89 @@
+﻿@model DatingApplication.Models.UpgradeViewModel
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+
+
+    <div class="container upgrade-container">
+        <h5 class="login-label">Αναβάθμιση σε Premium</h5>
+        <div>
+            <div class="upgrade-info">
+                <h5 class="login-label">Οφέλη του Premium</h5>
+                <p>
+                    Γίνε κι εσύ ένα από τα πολλά μέλη μας που απολαμβάνουν τα οφέλη της Premium συνδρομής και βρες το ταίρι σου!<br /><br />
+                    Η Premium συνδρομή έχει ετήσια διάρκεια και είναι ο τρόπος να ξεκλειδώσεις ολες τις δυνατότες για μια ανεπανάληπτη εμπειρία.<br /><br />
+                    Συγκεκριμένα:<br /><br />
+                    <i class="fas fa-heart"></i>Προβολή όλων των ταιριών σου<br /><br />
+                    <i class="fas fa-sliders-h"></i>Δυνατότητα επαναπροσαρμογής των προτιμήσεων σου<br /><br />
+                    <i class="fas fa-users"></i>Πρόσβαση σε όλα τα μέλη μας και όλες τις πληροφορίες τους<br /><br />
+                    <i class="fas fa-search"></i>Δυνατότητα αναζήτης με πλήθος κριτηρίων<br /><br />
+                    <i class="fas fa-eye"></i>Πρόσβαση στα μέλη που επισκέφτηκαν το προφίλ σου ή σε βαθμολόγησαν<br /><br />
+                    <i class="fas fa-mobile-alt"></i>Δυνατότητα λήψης της εφαρμογής για κινητό<br /><br />
+                    <small><i>Το κόστος της συνδρομής ανέρχεται στα 15€ και έχει διάρκεια 365 ημερολογιακές ημέρες</i></small>
+                </p>
+            </div>
+
+
+
+            <div class="upgrade-form">
+                <h5 class="login-label">Πληρωμή</h5>
+                @using (Html.BeginForm("Upgrade", "Upgrade", FormMethod.Post, new { @id = "upgrade-form" }))
+                {
+                    <div class="form-group">
+                        <i class="fas fa-money-bill-wave-alt"></i>@Html.LabelFor(m => m.PaymentMethod, "Τρόπος πληρωμής")
+                        @Html.DropDownListFor(m => m.PaymentMethod, Model.PaymentMethods, new { @id = "payment-method", @class = "form-control", @required = true, @onchange = "onPaymentMethodChanged();" })
+                    </div>
+
+                    <div id="payment-details-card">
+                        <div class="form-group">
+                            <i class="fas fa-credit-card"></i>@Html.LabelFor(m => m.CardNumber, "Αριθμός κάρτας")
+                            @Html.TextBoxFor(m => m.CardNumber, new { @id = "card-number", @type = "text", @class = "form-control", @required = true, @maxlength = "16" })
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-calendar-alt"></i>@Html.LabelFor(m => m.CardExpiryMonth, "Ημερομηνία λήξης")
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.CardExpiryMonth, Model.CardExpiryMonths, new { @id = "card-expiry-month", @class = "form-control", @required = true, @style = "width:50%;float:left;" })
+                                @Html.DropDownListFor(m => m.CardExpiryYear, Model.CardExpiryYears, new { @id = "card-expiry-year", @class = "form-control", @required = true, @style = "width:50%;float:left;" })
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top:3.4rem">
+                            <i class="fas fa-unlock-alt"></i>@Html.LabelFor(m => m.CardCVC, "Κωδικός ασφαλείας (CVC)")
+                            @Html.TextBoxFor(m => m.CardCVC, new { @id = "card-cvc", @type = "text", @class = "form-control", @required = true, @maxlength = "3" })
+                        </div>
+                    </div>
+
+                    <div id="payment-details-paypal" style="display:none">
+                        <div class="form-group">
+                            <i class="fas fa-envelope"></i>@Html.LabelFor(m => m.PaypalEmail, "Διεύθυνση email")
+                            @Html.TextBoxFor(m => m.PaypalEmail, new { @id = "paypal-email", @type = "email", @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-purple form-control">Πληρωμή</button>
+                    </div>
+                }
+            </div>
+
+        </div>
+        @if (ViewBag.Error != null || ViewBag.Success != null)
+        {
+            string messageText = "";
+            string messageClass = "";
+            if (ViewBag.Error != null)
+            {
+                messageText = ViewBag.Error;
+                messageClass = "danger";
+            }
+
+            if (ViewBag.Success != null)
+            {
+                messageText = ViewBag.Success;
+                messageClass = "success";
+            }
+
+            <div class="alert alert-position alert-@messageClass" role="alert">
+                @messageText
+            </div>
+        }
+
+    </div>

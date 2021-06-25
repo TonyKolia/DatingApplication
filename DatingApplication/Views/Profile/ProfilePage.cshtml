@@ -1,0 +1,123 @@
+﻿@model DatingApplication.Models.ProfileViewModel
+@{ Layout = "~/Views/Shared/_Layout.cshtml"; }
+
+<div class="container" style="margin-top:0.75%;">
+    <div style="width:65%;float:left">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                @for (var i = 1; i < Model.ImagePaths.Count(); i++)
+                {
+                    <li data-target="#carouselExampleIndicators" data-slide-to=@i.ToString()></li>
+                }
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img class="d-block w-100" style="height:900px !important;" src=@Url.Content("~/Content/Images/UserImages/"+Model.Id+"/"+Model.ImagePaths[0]) alt="First slide">
+                </div>
+                @for (var i = 1; i < Model.ImagePaths.Count(); i++)
+                {
+                    <div class="carousel-item">
+                        <img class="d-block w-100" style="height:900px !important;" src=@Url.Content("~/Content/Images/UserImages/"+Model.Id+"/"+Model.ImagePaths[i]) alt="First slide">
+                    </div>
+                }
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="login-section" style="padding-left:6%;padding-right:6%;">
+        <div style="height:25%;margin-top:30%;text-align:center">
+            <div style="height:100%; padding-left:0px;padding-right:0px;padding-bottom:15%;">
+                <h2>@Model.Name @Model.Surname</h2>
+                <p class="card-text" style="word-break: break-all; word-wrap: break-word;padding-left:0px;padding-right:0px;padding-top:10%;"><i>@Model.SelfDescription</i></p>
+            </div>
+        </div>
+        
+        <div style="height:40%; text-align:center;">
+            <div class="form-item-column" style="height:100%;border-right: 1px #ffffff70 solid; padding-left:0px;padding-right:0px">
+                <div title="Προσωπικά στοιχεία" style="font-size:25px;"><i class="fas fa-user"></i></div>
+                <div style="padding-top:25px"><i class="fas fa-transgender"></i>@Model.Gender</div>
+                <div style="padding-top:25px"><i class="fas fa-calendar-alt"></i>@Model.Age ετών</div>
+                <div style="padding-top:25px"><i class="fas fa-ruler-vertical" style="padding-right:17px"></i>@Model.Height cm</div>
+                <div style="padding-top:25px"><i class="fas fa-weight"></i>@Model.Weight kg</div>
+                <div style="padding-top:25px"><i class="fas fa-eye"></i>@Model.EyeColor</div>
+                <div style="padding-top:25px"><i class="fas fa-palette"></i>@Model.HairColor</div>
+            </div>
+
+            <div class="form-item-column" style="height:100%; padding-left:0px;padding-right:0px">
+                <div title="Ενδιαφέροντα" style="font-size:25px;"><i class="fas fa-running"></i></div>
+                <ul style="padding-left:0px">
+                    @foreach (var h in Model.Hobbies)
+                    {
+                        <div style="padding-top:25px">@h</div>
+                    }
+                </ul>
+            </div>
+        </div>
+        
+
+
+        @{
+            //used to display the user rating by using hearts
+            string ratingClass = "";
+            var userRating = DatingApplication.Helpers.RatingHelper.GetUserRating(int.Parse(Model.Id));
+            if (userRating > 0) //if user has been rated, the hearts are display only
+            {
+                <div class="profile-item rating-container-ltr">
+                    <div>
+                        @for (var i = 1; i <= 5; i++)
+                        {
+                            ratingClass = userRating >= i ? "full-heart" : "";
+                            <i class="fas fa-heart heart @ratingClass"></i>
+                        }
+                    </div>
+                </div>
+            }
+            else //else the hearts are interactive
+            {
+                int rating = 5;
+                <div class="profile-item rating-container-rtl">
+                    @for (var i = 1; i <= 5; i++)
+                    {
+                        <i onclick="rateUser(@Model.Id, @rating)" class="fas fa-heart heart"></i>
+                        rating--; //used to print hearts in the reverse order since a different container is used to achieve the hover effect
+                        //it's pretty weird..
+                    }
+                </div>
+            }
+        }
+
+
+
+    </div>
+</div>
+
+@if (ViewBag.Error != null || ViewBag.Success != null)
+{
+    string messageText = "";
+    string messageClass = "";
+    if (ViewBag.Error != null)
+    {
+        messageText = ViewBag.Error;
+        messageClass = "danger";
+    }
+
+    if (ViewBag.Success != null)
+    {
+        messageText = ViewBag.Success;
+        messageClass = "success";
+    }
+
+    <div class="alert alert-position alert-@messageClass" role="alert">
+        @messageText
+    </div>
+}
+
+

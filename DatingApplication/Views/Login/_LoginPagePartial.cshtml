@@ -1,0 +1,29 @@
+﻿@model users
+@{ Layout = "~/Views/Shared/_LoginLayout.cshtml"; }
+
+    <div style="margin-top:70%">
+        <div class="form-group" style="text-align:center">
+                <span style="font-family: 'Dancing Script', cursive;text-align:center;font-size:60px;color:var(--main-color)">N</span>
+        </div>
+        <h5 class="login-label">Σύνδεση στο λογαριασμό σου</h5>
+        @using (Html.BeginForm("Index", "Login", FormMethod.Post, new { @id = "login-form" }))
+        {
+            <div class="form-group">
+                <i class="fas fa-envelope"></i>@Html.LabelFor(m => m.email, "Διεύθυνση email")
+                @Html.TextBoxFor(m => m.email, new { @type = "email", @class = "form-control", @required = true })
+            </div>
+            <div class="form-group">
+                <i class="fas fa-unlock-alt"></i>@Html.LabelFor(m => m.password, "Κωδικός πρόσβασης")
+                @Html.TextBoxFor(m => m.password, new { @type = "password", @class = "form-control", @required = true })
+            </div>
+            if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">@ViewBag.Error</div>
+            }
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-purple">Σύνδεση</button>
+            </div>
+
+            <medium style="float:right;">Δεν είσαι μέλος;&nbsp;<a href="~/Register">Εγγραφή</a></medium>
+        }
+    </div>
